@@ -2,6 +2,7 @@ import { Category, ChartComponent ,DataLabel,Inject,Legend,LineSeries, SeriesCol
 import './App.css';
 
 function App() {
+
   const wasteData = [
     {month:'Jan',waste:35},{month:'Feb',waste:28},
     {month:'Mar',waste:38},{month:'Apr',waste:28},
