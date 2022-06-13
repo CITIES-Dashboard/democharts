@@ -1,12 +1,41 @@
-
-
 Object.defineProperty(exports,"__esModule",{ value: true });
-export let gymData =[
-    {day:'SUN',checkIn:125,total:10656},
-    {day:'MON',checkIn:125,total:10614},
-    {day:'TUE',checkIn:130,total:11082},
-    {day:'WED',checkIn:124,total:10566},
-    {day:'THR',checkIn:127,total:10819},
-    {day:'FRI',checkIn:117,total:9986},
-    {day:'SAT',checkIn:111,total:9319},
-]
+
+const google = window.google;
+google.charts.load('current');
+google.charts.setOnLoadCallback(init);
+
+
+function init() {
+  var url = 'https://docs.google.com/spreadsheets/d/1KRMiKbX0R_7QtLfwIZStgFW3ig0Eyt1C/edit#gid=337720664';
+  var query = new google.visualization.Query(url);
+  query.setQuery('select B, C, D, E, F');
+  query.send(processSheetsData);
+}
+
+function processSheetsData(response) {
+    let array = [];
+    var data = response.getDataTable();
+    var columns = data.getNumberOfColumns();
+    var rows = data.getNumberOfRows() - 1;
+
+    for (var r = 5; r < rows; r++) {
+      var row = [];
+      for (var c = 0; c < columns; c++) {
+        row.push(data.getFormattedValue(r, c));
+      }
+      array.push({
+        year: row[0],
+        visitors: row[1],
+        staff_affiliation: row[2],
+        grad_alumni: row[3],
+        undergrad: row[4],
+
+      });
+    }
+    console.log(array);
+    exports.arr = array;
+  }
+
+
+
+
