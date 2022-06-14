@@ -1,11 +1,9 @@
-Object.defineProperty(exports,"__esModule",{ value: true });
+import { renderApp } from "./index.js";
 
 const google = window.google;
-google.charts.load('current');
-google.charts.setOnLoadCallback(init);
+export let dataSource = []
 
-
-function init() {
+export function fetchSheetData() {
   var url = 'https://docs.google.com/spreadsheets/d/1KRMiKbX0R_7QtLfwIZStgFW3ig0Eyt1C/edit#gid=337720664';
   var query = new google.visualization.Query(url);
   query.setQuery('select B, C, D, E, F');
@@ -33,8 +31,12 @@ function processSheetsData(response) {
       });
     }
     console.log(array);
-    exports.arr = array;
-  }
+    dataSource = array;
+
+    // Call function from index.js to render the App to root component
+    // after finihsing parsing data from Google Sheet
+    renderApp();
+}
 
 
 
