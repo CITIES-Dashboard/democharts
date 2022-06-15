@@ -1,5 +1,5 @@
 import React from 'react'
-import { Category, ChartComponent ,DataLabel,Inject,Legend,LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip} from '@syncfusion/ej2-react-charts';
+import { Category, ChartComponent ,DataLabel,Inject,Legend,LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, StackingBarSeries} from '@syncfusion/ej2-react-charts';
 import './App.css';
 import {dataSource} from './data.js';
 
@@ -29,7 +29,22 @@ function App(){
 
           </SeriesCollectionDirective>
         </ChartComponent>
+
+      <ChartComponent id='charts' primaryXAxis={{valueType:"Category" ,title:"Year"}} primaryYAxis={{title:"Check In"}} Legend={{visible:true}}  tooltip={{enable:true}}>
+        <Inject services={[StackingBarSeries, Category, Tooltip, DataLabel]} />
+        <SeriesCollectionDirective>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='staff_affiliation' name='Staff Affiliation' type='StackingBar' marker={{ dataLabel:{visible:true}, visible:true}} cornerRadius={
+                {bottomLeft:10, topLeft: 10}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='undergrad' name='Undergrad'  type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='grad_alumni'name='Grad and Alumni' type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='visitors' name='Visitors'type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}cornerRadius={
+                {bottomRight:10, topRight: 10}}/>
+        </SeriesCollectionDirective>
+      </ChartComponent>
+
       </div>
+
+
     );
   }
 
