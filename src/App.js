@@ -1,7 +1,10 @@
 import React from 'react'
-import { Category, ChartComponent ,DataLabel,Inject,Legend,LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, StackingBarSeries} from '@syncfusion/ej2-react-charts';
+import { Chart, Category, ChartComponent ,DataLabel,Inject,Legend,LineSeries, SeriesCollectionDirective, SeriesDirective, Tooltip, StackingColumnSeries} from '@syncfusion/ej2-react-charts';
 import './App.css';
 import {dataSource} from './data.js';
+
+Chart.Inject(Chart, StackingColumnSeries, Category, Tooltip, Legend);
+
 
 function App(){
   // add(){
@@ -31,14 +34,14 @@ function App(){
         </ChartComponent>
 
       <ChartComponent id='charts' primaryXAxis={{valueType:"Category" ,title:"Year"}} primaryYAxis={{title:"Check In"}} Legend={{visible:true}}  tooltip={{enable:true}}>
-        <Inject services={[StackingBarSeries, Category, Tooltip, DataLabel]} />
+        <Inject services={[StackingColumnSeries, Category, Tooltip, DataLabel, Legend]} />
         <SeriesCollectionDirective>
-        <SeriesDirective dataSource={dataSource} xName='year' yName='staff_affiliation' name='Staff Affiliation' type='StackingBar' marker={{ dataLabel:{visible:true}, visible:true}} cornerRadius={
-                {bottomLeft:10, topLeft: 10}}/>
-        <SeriesDirective dataSource={dataSource} xName='year' yName='undergrad' name='Undergrad'  type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}/>
-        <SeriesDirective dataSource={dataSource} xName='year' yName='grad_alumni'name='Grad and Alumni' type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}/>
-        <SeriesDirective dataSource={dataSource} xName='year' yName='visitors' name='Visitors'type='StackingBar' marker={{dataLabel:{visible:true}, visible:true}}cornerRadius={
-                {bottomRight:10, topRight: 10}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='staff_affiliation' name='2018' type='StackingColumn' marker={{ dataLabel:{visible:true}, visible:true}} cornerRadius={
+                {bottomLeft:10, bottomRight: 10}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='undergrad' name='2019'  type='StackingColumn' marker={{dataLabel:{visible:true}, visible:true}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='grad_alumni'name='2020' type='StackingColumn' marker={{dataLabel:{visible:true}, visible:true}}/>
+        <SeriesDirective dataSource={dataSource} xName='year' yName='visitors' name='2021'type='StackingColumn' marker={{dataLabel:{visible:true}, visible:true}}cornerRadius={
+                {topLeft:10, topRight: 10}}/>
         </SeriesCollectionDirective>
       </ChartComponent>
 
